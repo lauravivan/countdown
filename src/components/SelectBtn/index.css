@@ -1,0 +1,11 @@
+.select-btn {
+  position: relative;
+}
+
+.select-btn-modal {
+  top: 120px !important;
+
+  @media (max-width: 480px) {
+    top: 140px !important;
+  }
+}
