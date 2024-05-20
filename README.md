@@ -1,8 +1,8 @@
 # countdown
 
-## Description
-
 This is a web app made with React.js to keep on track countdown of important events.
+
+🐨 A work in progress...
 
 <div align="center">
   
