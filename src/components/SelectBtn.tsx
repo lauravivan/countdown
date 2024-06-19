@@ -1,41 +1,5 @@
-// /* eslint-disable react/prop-types */
-// import Modal from "@/components/Modal/index.jsx";
-// import useModal from "@/hooks/useModal";
-// import "@/components/SelectBtn/index.css";
-// import { useState } from "react";
-
-import { useModal, useSort } from "@/context";
-import { Modal } from "./Modal";
-
-// export function SelectBtn({ children, iconName }) {
-//   const { isClosed, openModal, closeModal } = useModal();
-//   const [btnCoordenates, setBtnCoordenates] = useState({});
-
-//   function handleBtnClick(e) {
-//     e.stopPropagation();
-//     openModal();
-
-//     setBtnCoordenates({
-//       left: Math.abs(e.target.getBoundingClientRect().left - 100),
-//     });
-//   }
-
-//   return (
-//     <button className="select-btn" onClick={handleBtnClick}>
-//       <ion-icon name={iconName}></ion-icon>
-//       <Modal
-//         classes="select-btn-modal"
-//         isClosed={isClosed}
-//         handleModalClose={closeModal}
-//         styles={{
-//           left: btnCoordenates.left,
-//         }}
-//       >
-//         {children}
-//       </Modal>
-//     </button>
-//   );
-// }
+import { useModal } from "@/context";
+import { useEffect } from "react";
 
 type SelectBtnType = {
   iconName: string;
@@ -52,25 +16,36 @@ export function SelectBtn({
 }: SelectBtnType) {
   const modal = useModal();
 
-  const handleButtonClick = () => {
-    modal.openModal();
+  useEffect(() => {
+    insertModalContent();
+  }, [optionSelected]);
+
+  const insertModalContent = () => {
     modal.insertContent(
       <ul className="select-list">
-        {listOfOptions.map((option, i) => (
-          <li
-            key={i}
-            className={option === optionSelected ? "select-list__active" : ""}
-            // onClick={handleSelect(option)}
-          >
-            {option}
-          </li>
-        ))}
+        {listOfOptions.map((option, i) => {
+          return (
+            <li
+              key={i}
+              className={option === optionSelected ? "select-list__active" : ""}
+              onClick={() => handleSelect(option)}
+            >
+              {option}
+            </li>
+          );
+        })}
       </ul>
     );
   };
 
   return (
-    <button onClick={handleButtonClick} className="select-btn">
+    <button
+      onClick={() => {
+        modal.openModal();
+        insertModalContent();
+      }}
+      className="select-btn"
+    >
       <ion-icon name={iconName}></ion-icon>
     </button>
   );
