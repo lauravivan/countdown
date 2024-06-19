@@ -1,31 +1,12 @@
-import { useState } from "react";
-
 type ToggleBtnType = {
-  defaultIcon: string;
-  toggleIcon: string;
-  setNewValue: (value: string) => void;
+  icon: string;
+  setToggle: () => void;
 };
 
-export function ToggleBtn({
-  defaultIcon,
-  toggleIcon,
-  setNewValue,
-}: ToggleBtnType) {
-  const [iconName, setIconName] = useState(defaultIcon);
-
-  const handleToggle = () => {
-    if (iconName == defaultIcon) {
-      setIconName(toggleIcon);
-      setNewValue(toggleIcon);
-    } else {
-      setIconName(defaultIcon);
-      setNewValue(defaultIcon);
-    }
-  };
-
+export function ToggleBtn({ icon, setToggle }: ToggleBtnType) {
   return (
-    <button type="button" onClick={handleToggle}>
-      <ion-icon name={iconName} />
+    <button type="button" onClick={setToggle}>
+      <ion-icon name={icon} />
     </button>
   );
 }

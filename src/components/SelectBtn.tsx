@@ -4,6 +4,9 @@
 // import "@/components/SelectBtn/index.css";
 // import { useState } from "react";
 
+import { useModal, useSort } from "@/context";
+import { Modal } from "./Modal";
+
 // export function SelectBtn({ children, iconName }) {
 //   const { isClosed, openModal, closeModal } = useModal();
 //   const [btnCoordenates, setBtnCoordenates] = useState({});
@@ -36,11 +39,38 @@
 
 type SelectBtnType = {
   iconName: string;
+  listOfOptions: Array<string>;
+  optionSelected: string;
+  handleSelect: (option: string) => void;
 };
 
-export function SelectBtn({ iconName }: SelectBtnType) {
+export function SelectBtn({
+  iconName,
+  listOfOptions,
+  optionSelected,
+  handleSelect,
+}: SelectBtnType) {
+  const modal = useModal();
+
+  const handleButtonClick = () => {
+    modal.openModal();
+    modal.insertContent(
+      <ul className="select-list">
+        {listOfOptions.map((option, i) => (
+          <li
+            key={i}
+            className={option === optionSelected ? "select-list__active" : ""}
+            // onClick={handleSelect(option)}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
-    <button>
+    <button onClick={handleButtonClick} className="select-btn">
       <ion-icon name={iconName}></ion-icon>
     </button>
   );

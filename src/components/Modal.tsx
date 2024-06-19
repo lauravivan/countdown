@@ -1,7 +1,6 @@
 // /* eslint-disable react/prop-types */
 // import "@/components/Modal/index.css";
 // import { useRef, useEffect } from "react";
-// import { createPortal } from "react-dom";
 // import RemoveIcon from "uiEl/RemoveIcon/index.jsx";
 
 // export function Modal({
@@ -24,3 +23,22 @@
 //     document.body
 //   );
 // }
+
+import { createPortal } from "react-dom";
+import { useModal } from "@/context";
+
+type ModalType = {
+  children: React.ReactNode;
+};
+
+export function Modal({ children }: ModalType) {
+  const modal = useModal();
+
+  return createPortal(
+    <dialog open={modal.isOpen} className="modal">
+      {/* <RemoveIcon onClick={modal.openModal} /> */}
+      {children}
+    </dialog>,
+    document.body
+  );
+}
