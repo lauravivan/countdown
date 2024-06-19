@@ -2,3 +2,13 @@
   color: $dark;
   font-family: $quicksand;
 }
+
+.remove-icon ion-icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.remove-icon ion-icon:hover {
+  background-color: var(--gray) !important;
+  border-radius: 5px;
+}
