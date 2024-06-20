@@ -1,167 +1,110 @@
-export function Card() {
-  <>
-    <div
-      className="card"
-      //   style={{ backgroundColor: `#${cardColor}` }}
-      //   onMouseOver={handleCardMouseOver}
-      //   onMouseLeave={handleCardMouseLeave}
-    >
-      {/* <div className="card-desc-wrapper">
-        {descInEditMode && (
-          <form onSubmit={handleFormSubmission}>
-            <input
-              name="card-desc"
-              id="card-desc"
-              className="card-desc"
-              placeholder={cardDesc}
-              onKeyDown={handleDescChange}
-              maxLength={DESC_MAX_LENGTH}
-              autoComplete="off"
-            />
-          </form>
-        )}
-        {!descInEditMode && (
-          <div className="card-desc" onClick={handleDescClick}>
-            {cardDesc}
-          </div>
-        )}
-        <div className="card-count" onClick={handleDaysClick}>
-          {cardCounting}
-          {showRemoveIcon && (
-            <div className="card-count-date">({cardDate})</div>
-          )}
-        </div>
-      </div>
-      {showRemoveIcon && (
-        <RemoveIcon
-          classes={`${showRemoveIcon ? "card-hover" : "card-unhover"}`}
-          onClick={deleteOnClick}
-        />
-      )} */}
-    </div>
-    {/* <Modal
-        isClosed={isClosed}
-        styles={{
-          top: modalCoordenates.top,
-          left: modalCoordenates.left,
-        }}
-        handleModalClose={closeModal}
-      >
-        <form className="card-form-date" onSubmit={handleFormSubmission}>
-          <input
-            type="date"
-            name="card-date"
-            id="card-date"
-            onChange={handleDatePick}
-          />
-          <div className="colors">{colorsAvailable}</div>
-        </form>
-      </Modal> */}
-  </>;
+import { useModal } from "@/context";
+import {
+  DESC_MAX_LENGTH,
+  getCountingOfDays,
+  getColors,
+  extractDateFromUTCString,
+  getFormattedDate,
+} from "@/util";
+import { SetStateAction, Dispatch } from "react";
+
+interface CardType {
+  event: EventType;
+  index: number;
+  setEvents: Dispatch<SetStateAction<EventType[]>>;
 }
 
-// /* eslint-disable react/prop-types */
-// import "uiEl/Card/index.css";
-// import { useState } from "react";
-// // import { deleteEvent } from "@/data/event";
-// import { DESC_MAX_LENGTH } from "@/util/validator";
-// import Modal from "@/components/Modal/index.js";
-// import useModal from "@/hooks/useModal";
-// import { getColors } from "@/util/color";
-// import { updateEvent } from "@/data/event";
-// import { getCountingOfDays, getFormattedDate } from "@/util/date";
-// import RemoveIcon from "uiEl/RemoveIcon/index.jsx";
+export function Card({ event, index, setEvents }: CardType) {
+  const modal = useModal();
 
-// // eslint-disable-next-line react/prop-types
-// export function Card({ id, desc, color, date, deleteOnClick }) {
-//   const [descInEditMode, setDescInEditMode] = useState(false);
-//   const [cardDesc, setCardDesc] = useState(desc);
-//   const [cardColor, setCardColor] = useState(color);
-//   const [cardDate, setCardDate] = useState(date);
-//   const [cardCounting, setCardCounting] = useState(getCountingOfDays(date));
-//   const { openModal, isClosed, closeModal } = useModal();
-//   const [showRemoveIcon, setShowRemoveIcon] = useState(false);
-//   const [modalCoordenates, setModalCoordenates] = useState({});
+  const handleDescChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const desc = e.target.value;
 
-//   const colorsAvailable = getColors().map((color, index) => (
-//     <span
-//       key={index}
-//       className={`color-circle color-circle--${color}`}
-//       onClick={handleColorChange.bind(self, color)}
-//     ></span>
-//   ));
+    setEvents((prevEvents) => {
+      const et = [...prevEvents];
+      et[index].desc = desc;
+      return et;
+    });
+  };
 
-//   function handleDescClick(e) {
-//     e.preventDefault();
-//     setDescInEditMode(true);
-//   }
+  const getColorsAvailable = () => {
+    const colorsAvailable = getColors().map((color, index) => (
+      <span
+        key={index}
+        className={`color-circle color-circle--${color}`}
+        onClick={handleColorPick.bind(self, color)}
+      ></span>
+    ));
 
-//   function leaveDescEditMode(time, e) {
-//     setTimeout(() => {
-//       e.target.blur();
-//       setDescInEditMode(false);
-//     }, time);
-//   }
+    return colorsAvailable;
+  };
 
-//   function handleFormSubmission(e) {
-//     e.preventDefault();
-//     leaveDescEditMode(100, e);
-//   }
+  const handleColorPick = (color: string) => {
+    setEvents((prevEvents) => {
+      const et = [...prevEvents];
+      et[index].color = color;
+      return et;
+    });
+  };
 
-//   function handleCardMouseOver() {
-//     setShowRemoveIcon(true);
-//   }
+  const handleCardCountClick = () => {
+    modal.openModal();
+    modal.insertContent(
+      <form className="card-form-date" onSubmit={(e) => e.preventDefault()}>
+        <input
+          type="date"
+          name="card-date"
+          id="card-date"
+          onChange={handleDatePick}
+        />
+        <div className="colors">{getColorsAvailable()}</div>
+      </form>
+    );
+  };
 
-//   function handleCardMouseLeave() {
-//     setShowRemoveIcon(false);
+  const handleDatePick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const datePicked = e.target.value;
 
-//     if (descInEditMode) {
-//       setDescInEditMode(false);
-//     }
-//   }
+    setEvents((prevEvents) => {
+      const et = [...prevEvents];
+      et[index].date = getFormattedDate(datePicked);
+      return et;
+    });
+  };
 
-//   function handleDescChange(e) {
-//     setTimeout(() => {
-//       const userVal = e.target.value;
-//       updateEvent(id, "desc", userVal);
-//       setCardDesc(userVal);
-//     }, 100);
-//   }
+  const handleEventDelete = () => {
+    setEvents((prevEvents) => {
+      const et = [...prevEvents];
+      return et.filter((e) => e.id !== event.id);
+    });
+  };
 
-//   function handleDaysClick(e) {
-//     e.stopPropagation();
-//     openModal();
-//     const eCoordenates = e.target.getBoundingClientRect();
-//     const bodyCoordenates = document.body.getBoundingClientRect();
-
-//     const CARD_HEIGHT = 300;
-
-//     let top = Math.abs(eCoordenates.top - CARD_HEIGHT);
-
-//     if (bodyCoordenates.top < 0) {
-//       top = top + Math.abs(bodyCoordenates.top);
-//     }
-
-//     setModalCoordenates({
-//       top: top,
-//       left: Math.abs(eCoordenates.left),
-//     });
-//   }
-
-//   function handleDatePick(e) {
-//     const userVal = e.target.value;
-//     let newDate = getFormattedDate(userVal);
-//     updateEvent(id, "date", newDate);
-//     setCardDate(newDate);
-//     setCardCounting(getCountingOfDays(newDate));
-//   }
-
-//   function handleColorChange(color) {
-//     updateEvent(id, "color", color);
-//     setCardColor(color);
-//   }
-
-//   return (
-
-//   );
-// }
+  return (
+    <article className="card" style={{ backgroundColor: `#${event.color}` }}>
+      <div className="card__content">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            name="card-desc"
+            id={event.id}
+            className="card-desc"
+            value={event.desc}
+            placeholder={event.desc}
+            maxLength={DESC_MAX_LENGTH}
+            autoComplete="off"
+            onChange={handleDescChange}
+          />
+        </form>
+        <div className="card-count" onClick={handleCardCountClick}>
+          {getCountingOfDays(event.date)}
+          <div className="card-count__date">
+            ({extractDateFromUTCString(event.date)})
+          </div>
+        </div>
+      </div>
+      <div className="card__delete" onClick={handleEventDelete}>
+        <ion-icon name="trash-sharp"></ion-icon>
+      </div>
+    </article>
+  );
+}
