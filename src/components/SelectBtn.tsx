@@ -1,12 +1,12 @@
 import { useModal } from "@/context";
 import { useEffect } from "react";
 
-type SelectBtnType = {
+interface SelectBtnType {
   iconName: string;
   listOfOptions: Array<string>;
   optionSelected: string;
   handleSelect: (option: string) => void;
-};
+}
 
 export function SelectBtn({
   iconName,
