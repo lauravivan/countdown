@@ -1,6 +1,6 @@
 import { differenceInCalendarDays } from "date-fns";
 
-export function getCountingOfDays(dateToEvent) {
+export function getCountingOfDays(dateToEvent: string) {
   const currentDate = new Date();
   const parsedDate = new Date(dateToEvent);
 
@@ -17,7 +17,7 @@ export function getCountingOfDays(dateToEvent) {
   return "In " + difference + " days";
 }
 
-export function extractDateFromUTCString(utcString) {
+export function extractDateFromUTCString(utcString: string) {
   const splitString = utcString.split(" ");
 
   const dayOfWeek = splitString[0];
@@ -36,8 +36,8 @@ export function getUserTimeZone() {
   return userTimeZone;
 }
 
-export function getFormattedDate(date) {
-  let dateFormatted = date ? new Date(date) : new Date();
+export function getFormattedDate(date?: string): string {
+  let dateFormatted: any = date ? new Date(date) : new Date();
 
   dateFormatted = dateFormatted.toUTCString();
 

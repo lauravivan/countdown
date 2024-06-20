@@ -1,4 +1,4 @@
-function sortByAlphabet(events) {
+function sortByAlphabet(events: Array<EventType>) {
   events.sort((a, b) => {
     const x = a.desc.toLowerCase();
     const y = b.desc.toLowerCase();
@@ -14,7 +14,7 @@ function sortByAlphabet(events) {
   return events;
 }
 
-function sortByColor(events) {
+function sortByColor(events: Array<EventType>) {
   events.sort((a, b) => {
     const x = a.color;
     const y = b.color;
@@ -24,10 +24,10 @@ function sortByColor(events) {
   return events;
 }
 
-function sortByDate(events) {
+function sortByDate(events: Array<EventType>) {
   events.sort((a, b) => {
-    const x = new Date(a.date);
-    const y = new Date(b.date);
+    const x: any = new Date(a.date);
+    const y: any = new Date(b.date);
 
     if (x.getFullYear() - y.getFullYear()) {
       return x - y;
@@ -47,8 +47,11 @@ function sortByDate(events) {
   return events;
 }
 
-export function getSortedEvents(filteredEvents, sort) {
-  const s = sort.toLowerCase().split(" ");
+export function getSortedEvents(
+  filteredEvents: Array<EventType>,
+  typeOfSort: string
+) {
+  const s = typeOfSort.toLowerCase().split(" ");
 
   if (s.includes("alphabet")) {
     return sortByAlphabet(filteredEvents);

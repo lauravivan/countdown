@@ -1,4 +1,4 @@
-export function getColors() {
+export function getColors(): Array<string> {
   const colors = [
     "c19ee0",
     "fad643",
@@ -24,7 +24,7 @@ export function getColors() {
   return colors;
 }
 
-export function getColor() {
+export function getColor(): string {
   const colors = getColors();
 
   const index = Math.floor(Math.random() * colors.length);
