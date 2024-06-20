@@ -2,9 +2,9 @@ import { FILTER_OPTIONS } from "@/util";
 import { FilterContext } from "./index";
 import { useState, useEffect } from "react";
 
-type FilterProviderType = {
+interface FilterProviderType {
   children: React.ReactNode;
-};
+}
 
 export function FilterProvider({ children }: FilterProviderType) {
   const [filter, setFilter] = useState(

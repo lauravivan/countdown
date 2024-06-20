@@ -2,9 +2,9 @@ import { useState } from "react";
 import { ModalContext } from "./index";
 import { Modal } from "@/components";
 
-type ModalProviderType = {
+interface ModalProviderType {
   children: React.ReactNode;
-};
+}
 
 export function ModalProvider({ children }: ModalProviderType) {
   const [isOpen, setIsOpen] = useState(false);

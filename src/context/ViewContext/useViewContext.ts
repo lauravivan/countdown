@@ -1,12 +1,17 @@
 import { DEFAULT_VIEW } from "@/util";
 import { createContext, useContext } from "react";
 
-const defaultViewContextValue: ViewContextNamespace.ViewContextType = {
+interface ViewContextType {
+  view: string;
+  toggleView: () => void;
+}
+
+const defaultViewContextValue: ViewContextType = {
   view: DEFAULT_VIEW,
   toggleView: () => {},
 };
 
-export const ViewContext = createContext<ViewContextNamespace.ViewContextType>(
+export const ViewContext = createContext<ViewContextType>(
   defaultViewContextValue
 );
 

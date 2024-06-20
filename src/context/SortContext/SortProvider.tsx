@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { SortContext } from "./index";
 import { SORT_OPTIONS } from "@/util";
 
-type SortProviderType = {
+interface SortProviderType {
   children: React.ReactNode;
-};
+}
 
 export function SortProvider({ children }: SortProviderType) {
   const [sort, setSort] = useState(

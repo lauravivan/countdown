@@ -2,9 +2,9 @@ import { DEFAULT_THEME, TOGGLE_THEME } from "@/util";
 import { useState, useEffect } from "react";
 import { ThemeContext } from "./index";
 
-type ThemeProvider = {
+interface ThemeProvider {
   children: React.ReactNode;
-};
+}
 
 export function ThemeProvider({ children }: ThemeProvider) {
   const [theme, setTheme] = useState<string>(

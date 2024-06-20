@@ -2,9 +2,9 @@ import { DEFAULT_VIEW, TOGGLE_VIEW } from "@/util";
 import { ViewContext } from "./useViewContext";
 import { useEffect, useState } from "react";
 
-type ViewProviderType = {
+interface ViewProviderType {
   children: React.ReactNode;
-};
+}
 
 export function ViewProvider({ children }: ViewProviderType) {
   const [view, setView] = useState<string>(
