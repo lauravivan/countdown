@@ -6,6 +6,7 @@ interface SelectBtnType {
   listOfOptions: Array<string>;
   optionSelected: string;
   handleSelect: (option: string) => void;
+  modalTitle: string;
 }
 
 export function SelectBtn({
@@ -13,6 +14,7 @@ export function SelectBtn({
   listOfOptions,
   optionSelected,
   handleSelect,
+  modalTitle,
 }: SelectBtnType) {
   const modal = useModal();
 
@@ -27,7 +29,9 @@ export function SelectBtn({
           return (
             <li
               key={i}
-              className={option === optionSelected ? "select-list__active" : ""}
+              className={`${
+                option === optionSelected ? " select-list__active" : ""
+              } select-list__option`}
               onClick={() => handleSelect(option)}
             >
               {option}
@@ -36,6 +40,7 @@ export function SelectBtn({
         })}
       </ul>
     );
+    modal.insertModalTitle(modalTitle);
   };
 
   return (
