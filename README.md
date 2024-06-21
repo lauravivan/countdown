@@ -4,17 +4,9 @@ This is a web app made with React.js to keep on track countdown of important eve
 
 🐨 A work in progress...
 
-<div align="center">
-  
-  ![Light theme](./public/light-theme.png)
-  
-</div>
+## Preview
 
-<div align="center">
-  
-  ![Dark theme](./public/dark-theme.png)
-  
-</div>
+![Project preview light theme](https://github.com/lauravivan/countdown/assets/64754203/1804a5ab-75c3-4d16-87f2-4f9a20e2ec65)
 
 ## Features
 
@@ -31,11 +23,11 @@ This is a web app made with React.js to keep on track countdown of important eve
   - [x] Dark
 
 ## Tools
-
 ![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge)
-![CSS3 Badge](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff&style=for-the-badge)
+![Sass Badge](https://img.shields.io/badge/Sass-C69?logo=sass&logoColor=fff&style=for-the-badge)
 ![Vite Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff&style=for-the-badge)
-![JavaScript Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge)
+![TypeScript Badge](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)
+![ESLint Badge](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=fff&style=for-the-badge)
 
 ## Project Setup
 
