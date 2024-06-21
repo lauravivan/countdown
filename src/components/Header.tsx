@@ -10,23 +10,25 @@ export function Header() {
 
   return (
     <header className="header">
-      <div>
-        <div className="header__page-title">Countdown</div>
+      <div className="header__title-wrapper">
+        <div className="header__title-wrapper__title">Countdown</div>
         <ToggleBtn icon={theme.theme} setToggle={theme.toggleTheme} />
       </div>
-      <div>
+      <div className="header__menu">
         <ToggleBtn icon={view.view} setToggle={view.toggleView} />
         <SelectBtn
           iconName={FILTER}
           listOfOptions={FILTER_OPTIONS}
           optionSelected={filter.filter}
           handleSelect={filter.selectFilter}
+          modalTitle="Filter"
         />
         <SelectBtn
           iconName={SORT}
           listOfOptions={SORT_OPTIONS}
           optionSelected={sort.sort}
           handleSelect={sort.selectSort}
+          modalTitle="Sort"
         />
       </div>
     </header>

@@ -1,0 +1,76 @@
+.main {
+  &__cards-view-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    row-gap: 30px;
+  }
+
+  &__cards-view-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    animation: slideIn 0.4s ease-in 0s;
+  }
+
+  &__add-event {
+    background-color: $dark-white;
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+  }
+
+  &__card {
+    padding: 23px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      &__desc {
+        margin-bottom: 10px;
+        font-weight: 500;
+        word-break: break-all;
+        color: $dark-lighter;
+        font-size: calc($font-sm + 0.3rem);
+      }
+
+      &__count {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        font-size: calc($font-sm - 0.1rem);
+        flex-wrap: wrap;
+      }
+    }
+
+    &__delete {
+      align-self: flex-start;
+
+      > ion-icon {
+        font-size: calc($font-sm + 0.3rem);
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    &__cards-view-grid {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__card {
+      &__delete {
+        margin-top: 20px;
+      }
+    }
+  }
+}

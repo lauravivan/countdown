@@ -5,7 +5,7 @@ type ToggleBtnType = {
 
 export function ToggleBtn({ icon, setToggle }: ToggleBtnType) {
   return (
-    <button type="button" onClick={setToggle}>
+    <button className="toggle-btn" type="button" onClick={setToggle}>
       <ion-icon name={icon} />
     </button>
   );

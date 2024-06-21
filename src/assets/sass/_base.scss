@@ -1,14 +1,21 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
 :root {
   color: $dark;
   font-family: $quicksand;
 }
 
-.remove-icon ion-icon {
-  font-size: 2rem;
-  cursor: pointer;
+#root {
+  padding: 50px 40px 100px;
+
+  @media (max-width: 480px) {
+    padding: 30px 10px;
+  }
 }
 
-.remove-icon ion-icon:hover {
-  background-color: var(--gray) !important;
-  border-radius: 5px;
+button,
+input {
+  all: unset;
 }

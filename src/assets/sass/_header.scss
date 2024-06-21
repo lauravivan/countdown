@@ -1,2 +1,53 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+
+  &__title-wrapper {
+    display: flex;
+    column-gap: 10px;
+
+    &__title {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    column-gap: 20px;
+    margin-right: 20px;
+
+    .select-btn,
+    .toggle-btn {
+      padding: 10px;
+    }
+
+    .select-btn:hover,
+    .toggle-btn:hover {
+      background-color: $gray !important;
+    }
+  }
+
+  ion-icon {
+    font-size: 30px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    row-gap: 20px;
+    margin-bottom: 20px;
+
+    &__menu {
+      margin-right: 0px;
+    }
+
+    ion-icon {
+      font-size: 25px;
+      cursor: pointer;
+    }
+  }
 }

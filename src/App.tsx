@@ -15,7 +15,7 @@ function App() {
           <FilterProvider>
             <SortProvider>
               <Header />
-              {/* <Main /> */}
+              <Main />
             </SortProvider>
           </FilterProvider>
         </ViewProvider>
