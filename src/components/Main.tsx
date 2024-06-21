@@ -51,7 +51,7 @@ export function Main() {
     });
   }
 
-  const getSortAndFilter = () => {
+  const getFilterAndSortEvents = () => {
     const filtered = getFilteredEvents(filter.filter, events);
     const sorted = getSortedEvents(filtered, sort.sort);
 
@@ -61,17 +61,15 @@ export function Main() {
   return (
     <main className="main">
       <div className={`main__cards-view-${view.view} main__cards`}>
-        {getSortAndFilter().map((event: EventType, i: number) => (
+        {getFilterAndSortEvents().map((event: EventType, i: number) => (
           <Card event={event} key={i} index={i} setEvents={setEvents} />
         ))}
         <div
-          className="card card-add"
+          className="main__card main__add-event"
           style={{ textAlign: "center" }}
           onClick={() => createEvent()}
         >
-          <div>
-            <ion-icon name="add-outline"></ion-icon>
-          </div>
+          <ion-icon name="add-outline"></ion-icon>
         </div>
       </div>
     </main>
