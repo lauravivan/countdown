@@ -9,17 +9,35 @@ interface ModalProviderType {
 export function ModalProvider({ children }: ModalProviderType) {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<React.ReactNode>(<></>);
+  const [modalTitle, setModalTitle] = useState("");
 
   const openModal = () => {
-    setIsOpen((prevVal) => !prevVal);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   const insertContent = (content: React.ReactNode) => {
     setContent(content);
   };
 
+  const insertModalTitle = (modalTitle: string) => {
+    setModalTitle(modalTitle);
+  };
+
   return (
-    <ModalContext.Provider value={{ isOpen, openModal, insertContent }}>
+    <ModalContext.Provider
+      value={{
+        isOpen,
+        openModal,
+        closeModal,
+        insertContent,
+        insertModalTitle,
+        modalTitle,
+      }}
+    >
       {children}
       <Modal>{content}</Modal>
     </ModalContext.Provider>
