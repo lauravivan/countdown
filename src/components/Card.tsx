@@ -23,7 +23,11 @@ export function Card({ event, index, setEvents }: CardType) {
 
     setEvents((prevEvents) => {
       const et = [...prevEvents];
-      et[index].desc = desc;
+
+      if (event.id === et[index].id) {
+        et[index].desc = desc;
+      }
+
       return et;
     });
   };
@@ -43,7 +47,11 @@ export function Card({ event, index, setEvents }: CardType) {
   const handleColorPick = (color: string) => {
     setEvents((prevEvents) => {
       const et = [...prevEvents];
-      et[index].color = color;
+
+      if (event.id === et[index].id) {
+        et[index].color = color;
+      }
+
       return et;
     });
   };
@@ -77,7 +85,11 @@ export function Card({ event, index, setEvents }: CardType) {
 
     setEvents((prevEvents) => {
       const et = [...prevEvents];
-      et[index].date = getFormattedDate(datePicked);
+
+      if (event.id === et[index].id) {
+        et[index].date = getFormattedDate(datePicked);
+      }
+
       return et;
     });
   };

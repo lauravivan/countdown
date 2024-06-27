@@ -24,6 +24,8 @@ export function Main() {
 
   function createEvent() {
     let color = getColor();
+    const id = uuidv4();
+    const date = getFormattedDate();
 
     if (events.length > 0) {
       const lastColor = events[events.length - 1].color;
@@ -32,10 +34,6 @@ export function Main() {
         color = getColor();
       }
     }
-
-    const id = uuidv4();
-
-    const date = getFormattedDate();
 
     const event: EventType = {
       id: id,
