@@ -49,6 +49,9 @@ npm run dev
 npm run build
 ```
 
+## Figma
+Check on figma: [Countdown pre-design](https://www.figma.com/design/gVmO20jEApW9QnABw2oxcK/countdown?node-id=9-59&t=gwcl17yztkoz0b9s-1)
+
 ## License
 
 [MIT](./License.md)
