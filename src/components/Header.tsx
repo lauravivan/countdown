@@ -1,5 +1,4 @@
 import { ModalContentType } from "@/types/modal";
-import { ToggleBtn } from "./ToggleBtn";
 import { FILTER, SORT } from "@/util/constants";
 
 type HeaderProps = {
@@ -21,10 +20,14 @@ export function Header({
     <header className="header">
       <div className="header__title-wrapper">
         <div className="header__title-wrapper__title">Countdown</div>
-        <ToggleBtn icon={theme} setToggle={toggleTheme} />
+        <button className="toggle-btn" type="button" onClick={toggleTheme}>
+          <ion-icon name={theme} />
+        </button>
       </div>
       <div className="header__menu">
-        <ToggleBtn icon={view} setToggle={toggleView} />
+        <button className="toggle-btn" type="button" onClick={toggleView}>
+          <ion-icon name={view} />
+        </button>
         <button onClick={() => openModal("filter")} className="select-btn">
           <ion-icon name={FILTER}></ion-icon>
         </button>
