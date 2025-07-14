@@ -1,10 +1,14 @@
+import { ModalContentType } from "@/types/modal";
 import { useState } from "react";
 
 export default function useModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [contentType, setContentType] = useState<ModalContentType>(null);
 
-  const openModal = () => {
+  const openModal = (type: ModalContentType) => {
     setIsOpen(true);
+    setContentType(type);
   };
 
   const closeModal = () => {
@@ -15,5 +19,8 @@ export default function useModal() {
     openModal,
     closeModal,
     isOpen,
+    handleTitle: (title: string) => setTitle(title),
+    title,
+    contentType,
   };
 }

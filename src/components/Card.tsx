@@ -1,144 +1,103 @@
-import { useModal } from "@/context";
-import {
-  DESC_MAX_LENGTH,
-  getCountingOfDays,
-  getColors,
-  extractDateFromUTCString,
-  getFormattedDate,
-} from "@/util";
-import { SetStateAction, Dispatch, useState } from "react";
+import { extractDateFromUTCString, getCountingOfDays } from "@/util/date";
+import { DESC_MAX_LENGTH } from "@/util/constants";
+import { useMemo, useState } from "react";
+import { ModalContentType } from "@/types/modal";
 
 interface CardType {
   event: EventType;
-  index: number;
-  setEvents: Dispatch<SetStateAction<EventType[]>>;
+  updateEventDesc: (id: string, newDesc: string) => void;
+  deleteEvent: (id: string) => void;
+  openModal: (type: ModalContentType) => void;
+  handleEventId: (id: string) => void;
 }
 
-export function Card({ event, index, setEvents }: CardType) {
-  const modal = useModal();
+export function Card({
+  event,
+  updateEventDesc,
+  deleteEvent,
+  openModal,
+  handleEventId,
+}: CardType) {
   const [isCardHover, setIsCardHover] = useState(false);
+  const countOfDays = useMemo(
+    () => getCountingOfDays(event.date),
+    [event.date]
+  );
+  const countDateExtense = useMemo(
+    () => `(${extractDateFromUTCString(event.date)})`,
+    [event.date]
+  );
 
-  const handleDescChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const desc = e.target.value;
+  // const getColorsAvailable = () => {
+  //   const colorsAvailable = getColors().map((color, index) => (
+  //     <span
+  //       key={index}
+  //       className={`color-circle color-circle--${color}`}
+  //       onClick={handleColorPick.bind(self, color)}
+  //     ></span>
+  //   ));
 
-    setEvents((prevEvents) => {
-      const et = [...prevEvents];
+  //   return colorsAvailable;
+  // };
 
-      if (event.id === et[index].id) {
-        et[index].desc = desc;
-      }
-
-      return et;
-    });
+  const handleMouseOver = () => {
+    setIsCardHover(true);
   };
 
-  const getColorsAvailable = () => {
-    const colorsAvailable = getColors().map((color, index) => (
-      <span
-        key={index}
-        className={`color-circle color-circle--${color}`}
-        onClick={handleColorPick.bind(self, color)}
-      ></span>
-    ));
-
-    return colorsAvailable;
+  const handleMouseLeave = () => {
+    setIsCardHover(false);
   };
 
-  const handleColorPick = (color: string) => {
-    setEvents((prevEvents) => {
-      const et = [...prevEvents];
-
-      if (event.id === et[index].id) {
-        et[index].color = color;
-      }
-
-      return et;
-    });
+  const handleDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDesc = e.target.value;
+    updateEventDesc(event.id, newDesc);
   };
 
-  const handleCardCountClick = () => {
-    modal.openModal();
-    modal.insertContent(
-      <form className="card-date-update" onSubmit={(e) => e.preventDefault()}>
-        <label className="card-date-update__date">
-          New date:{" "}
-          <input
-            type="date"
-            name="card-date"
-            id={`card-date-${event.id}`}
-            onChange={handleDatePick}
-          />
-        </label>
-        <div className="card-date-update__colors">
-          <span>Pick a color: </span>
-          <div className="card-date-update__colors__colors">
-            {getColorsAvailable()}
-          </div>
-        </div>
-      </form>
-    );
-    modal.insertModalTitle(event.desc);
+  const handleDelete = () => {
+    deleteEvent(event.id);
   };
 
-  const handleDatePick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const datePicked = e.target.value;
-
-    setEvents((prevEvents) => {
-      const et = [...prevEvents];
-
-      if (event.id === et[index].id) {
-        et[index].date = getFormattedDate(datePicked);
-      }
-
-      return et;
-    });
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
   };
 
-  const handleEventDelete = () => {
-    setEvents((prevEvents) => {
-      const et = [...prevEvents];
-      return et.filter((e) => e.id !== event.id);
-    });
+  const handleClick = () => {
+    openModal("card");
+    handleEventId(event.id);
   };
 
   return (
     <article
-      className="main__card"
+      className="card"
       style={{ backgroundColor: `#${event.color}` }}
-      onMouseOver={() => setIsCardHover(true)}
-      onMouseLeave={() => setIsCardHover(false)}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
-      <div className="main__card__content">
-        <form onSubmit={(e) => e.preventDefault()}>
+      <div className="card__content">
+        <form onSubmit={handleFormSubmit}>
           <input
             type="text"
             name="card-desc"
             id={event.id}
-            className="main__card__content__desc"
+            className="card__content__desc"
             value={event.desc}
             placeholder={event.desc}
             maxLength={DESC_MAX_LENGTH}
             autoComplete="off"
-            onChange={handleDescChange}
+            onChange={handleDesc}
           />
         </form>
-        <div
-          className="main__card__content__count"
-          onClick={handleCardCountClick}
-        >
-          {getCountingOfDays(event.date)}
-          {isCardHover && (
-            <div className="main__card__content__count__date">
-              ({extractDateFromUTCString(event.date)})
-            </div>
-          )}
+        <div className="card__content__count" onClick={handleClick}>
+          <span>{countOfDays}</span>
+          {isCardHover && <span>{countDateExtense}</span>}
         </div>
       </div>
       {isCardHover && (
         <button
           type="button"
-          className="main__card__delete"
-          onClick={handleEventDelete}
+          className="card__delete"
+          onClick={handleDelete}
+          aria-label="Remover evento"
         >
           <ion-icon name="close-circle"></ion-icon>
         </button>

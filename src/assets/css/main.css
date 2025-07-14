@@ -146,67 +146,6 @@ input {
     cursor: pointer;
   }
 }
-.main__cards-view-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  row-gap: 30px;
-}
-.main__cards-view-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-  animation: slideIn 0.4s ease-in 0s;
-}
-.main__add-event {
-  background-color: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center !important;
-}
-.main__card {
-  padding: 23px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  height: auto;
-}
-.main__card__content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.main__card__content__desc {
-  margin-bottom: 10px;
-  font-weight: 500;
-  word-break: break-all;
-  color: #242424;
-  font-size: 1.3rem;
-}
-.main__card__content__count {
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  font-size: 0.9rem;
-  flex-wrap: wrap;
-}
-.main__card__delete {
-  align-self: flex-start;
-}
-.main__card__delete > ion-icon {
-  font-size: 1.3rem;
-}
-
-@media (max-width: 480px) {
-  .main__cards-view-grid {
-    display: flex;
-    flex-direction: column;
-  }
-  .main__card__delete {
-    margin-top: 20px;
-  }
-}
 .modal {
   border: none;
   position: fixed;
@@ -296,6 +235,71 @@ input {
 .select-list__active {
   background-color: #262626;
   color: #fff;
+}
+
+.card {
+  padding: 23px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+}
+.card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card__content__desc {
+  margin-bottom: 10px;
+  font-weight: 500;
+  word-break: break-all;
+  color: #242424;
+  font-size: 1.3rem;
+}
+.card__content__count {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.card__delete {
+  align-self: flex-start;
+}
+.card__delete > ion-icon {
+  font-size: 1.3rem;
+}
+@media (max-width: 480px) {
+  .card__delete {
+    margin-top: 20px;
+  }
+}
+
+.main__cards-view-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  row-gap: 30px;
+}
+.main__cards-view-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  animation: slideIn 0.4s ease-in 0s;
+}
+.main__add-event {
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+}
+
+@media (max-width: 480px) {
+  .main__cards-view-grid {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -13,7 +13,10 @@ export default function useEvent() {
     const id = uuidv4();
     const date = getFormattedDate();
 
-    const drawnColor = getDrawnColor(events[events.length - 1].color);
+    const drawnColor =
+      events?.length > 0
+        ? getDrawnColor(events[events.length - 1].color)
+        : getDrawnColor("");
 
     const event: EventType = {
       id: id,
@@ -21,6 +24,8 @@ export default function useEvent() {
       color: drawnColor,
       date: date,
     };
+
+    console.log(event);
 
     setEvents((prevEvents) => {
       const e = [...prevEvents];
