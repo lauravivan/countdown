@@ -1,6 +1,6 @@
-export const DEFAULT_THEME = "sunny";
+export const DEFAULT_THEME = "moon";
 
-export const TOGGLE_THEME = "moon";
+export const TOGGLE_THEME = "sunny";
 
 export const DEFAULT_VIEW = "grid";
 
