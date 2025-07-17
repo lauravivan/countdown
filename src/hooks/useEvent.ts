@@ -25,8 +25,6 @@ export default function useEvent() {
       date: date,
     };
 
-    console.log(event);
-
     setEvents((prevEvents) => {
       const e = [...prevEvents];
       e.push(event);

@@ -21,17 +21,13 @@
     .select-btn,
     .toggle-btn {
       padding: 10px;
+      border-radius: 15px;
     }
 
     .select-btn:hover,
     .toggle-btn:hover {
       background-color: $gray !important;
     }
-  }
-
-  ion-icon {
-    font-size: 30px;
-    cursor: pointer;
   }
 }
 
@@ -44,10 +40,16 @@
     &__menu {
       margin-right: 0px;
     }
+  }
+}
 
-    ion-icon {
-      font-size: 25px;
-      cursor: pointer;
+.dark {
+  .header {
+    &__menu {
+      .select-btn:hover,
+      .toggle-btn:hover {
+        background-color: $dark-lighter !important;
+      }
     }
   }
 }

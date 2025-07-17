@@ -6,10 +6,6 @@ export const DEFAULT_VIEW = "grid";
 
 export const TOGGLE_VIEW = "list";
 
-export const FILTER = "filter-sharp";
-
-export const SORT = "swap-vertical-sharp";
-
 export const FILTER_OPTIONS = [
   "All",
   "Happening this month",

@@ -15,6 +15,10 @@ export function getStoredEvents() {
   return [];
 }
 
+export function storeEvents(events: EventType[]) {
+  localStorage.setItem("countdown-events", JSON.stringify(events));
+}
+
 export function getStoredView() {
   const view = localStorage.getItem("countdown-view");
 
@@ -23,6 +27,10 @@ export function getStoredView() {
   }
 
   return DEFAULT_VIEW;
+}
+
+export function storeView(view: string) {
+  localStorage.setItem("countdown-view", view);
 }
 
 export function getStoredFilter() {
@@ -35,6 +43,10 @@ export function getStoredFilter() {
   return FILTER_OPTIONS[0];
 }
 
+export function storeFilter(filter: string) {
+  localStorage.setItem("countdown-filter", filter);
+}
+
 export function getStoredSort() {
   const sort = localStorage.getItem("countdown-sort");
 
@@ -45,6 +57,10 @@ export function getStoredSort() {
   return SORT_OPTIONS[0];
 }
 
+export function storeSort(sort: string) {
+  localStorage.setItem("countdown-sort", sort);
+}
+
 export function getStoredTheme() {
   const theme = localStorage.getItem("countdown-theme");
 
@@ -53,4 +69,8 @@ export function getStoredTheme() {
   }
 
   return DEFAULT_THEME;
+}
+
+export function storeTheme(theme: string) {
+  localStorage.setItem("countdown-theme", theme);
 }

@@ -1,4 +1,4 @@
-import { getStoredFilter } from "@/util/storage";
+import { getStoredFilter, storeFilter } from "@/util/storage";
 import { useState } from "react";
 
 export default function useFilter() {
@@ -6,6 +6,7 @@ export default function useFilter() {
 
   const selectFilter = (filterSelected: string) => {
     setFilter(filterSelected);
+    storeFilter(filterSelected);
   };
 
   return {

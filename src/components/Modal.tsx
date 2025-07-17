@@ -1,3 +1,5 @@
+import { BsXLg } from "react-icons/bs";
+
 type ModalType = {
   title: string;
   children: React.ReactNode;
@@ -15,7 +17,7 @@ export function Modal({ title, children, closeModal, isOpen }: ModalType) {
             className="modal__content__header__close"
             onClick={closeModal}
           >
-            <ion-icon name="close-outline"></ion-icon>
+            <BsXLg />
           </button>
         </div>
         {children}

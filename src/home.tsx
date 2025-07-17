@@ -9,6 +9,9 @@ import { Modal } from "@/components/Modal";
 import useModal from "@/hooks/useModal";
 import { FILTER_OPTIONS, SORT_OPTIONS } from "./util/constants";
 import { useState } from "react";
+import { getColors } from "./util/color";
+import { createPortal } from "react-dom";
+import { BsPlusLg } from "react-icons/bs";
 
 function ModalContent({
   options,
@@ -39,8 +42,14 @@ function ModalContent({
 }
 
 export default function Homepage() {
-  const { events, createEvent, updateEventDesc, deleteEvent, updateEventDate } =
-    useEvent();
+  const {
+    events,
+    createEvent,
+    updateEventDesc,
+    deleteEvent,
+    updateEventDate,
+    updateEventColor,
+  } = useEvent();
   const { view, toggleView } = useView();
   const { filter, selectFilter } = useFilter();
   const { selectSort, sort } = useSort();
@@ -64,9 +73,18 @@ export default function Homepage() {
     updateEventDate(eventId, datePicked);
   };
 
+  const ColorsAvailable = () =>
+    getColors().map((color, index) => (
+      <span
+        key={index}
+        className={`color-circle color-circle--${color}`}
+        onClick={updateEventColor.bind(self, eventId, color)}
+      ></span>
+    ));
+
   return (
-    <div>
-      <div>
+    <div className={`${theme === "moon" ? "dark" : "light"}`}>
+      <div className="homepage">
         <Header
           toggleTheme={toggleTheme}
           toggleView={toggleView}
@@ -74,15 +92,15 @@ export default function Homepage() {
           theme={theme}
           openModal={openModal}
         />
-        <main className="main">
-          <div className={`main__cards-view-${view} main__cards`}>
+        <main>
+          <div className={`cards-view-${view} cards`}>
             <div
-              className="main__card main__add-event"
+              className="cards__add-event"
               style={{ textAlign: "center" }}
               onClick={createEvent}
               aria-label="Adicionar evento"
             >
-              <ion-icon name="add-outline"></ion-icon>
+              <BsPlusLg />
             </div>
             {events.map((event: EventType) => (
               <Card
@@ -97,45 +115,48 @@ export default function Homepage() {
           </div>
         </main>
       </div>
-      <Modal
-        closeModal={closeModal}
-        title={contentType === "filter" ? "Filter" : "Sort"}
-        isOpen={isOpen}
-      >
-        {contentType === "filter" && (
-          <ModalContent
-            optionSelected={filter}
-            options={FILTER_OPTIONS}
-            handleSelect={selectFilter}
-          />
-        )}
-        {contentType === "sort" && (
-          <ModalContent
-            optionSelected={sort}
-            options={SORT_OPTIONS}
-            handleSelect={selectSort}
-          />
-        )}
-        {contentType === "card" && (
-          <form className="card-date-update" onSubmit={handleFormSubmit}>
-            <label className="card-date-update__date">
-              New date:
-              <input
-                type="date"
-                name="card-date"
-                id="card-date"
-                onChange={handleDate}
-              />
-            </label>
-            <div className="card-date-update__colors">
-              <span>Pick a color: </span>
-              <div className="card-date-update__colors__colors">
-                {/* {getColorsAvailable()} */}
+      {createPortal(
+        <Modal
+          closeModal={closeModal}
+          title={contentType === "filter" ? "Filter" : "Sort"}
+          isOpen={isOpen}
+        >
+          {contentType === "filter" && (
+            <ModalContent
+              optionSelected={filter}
+              options={FILTER_OPTIONS}
+              handleSelect={selectFilter}
+            />
+          )}
+          {contentType === "sort" && (
+            <ModalContent
+              optionSelected={sort}
+              options={SORT_OPTIONS}
+              handleSelect={selectSort}
+            />
+          )}
+          {contentType === "card" && (
+            <form className="card-date-update" onSubmit={handleFormSubmit}>
+              <label className="card-date-update__date">
+                New date:
+                <input
+                  type="date"
+                  name="card-date"
+                  id="card-date"
+                  onChange={handleDate}
+                />
+              </label>
+              <div className="card-date-update__colors">
+                <span>Pick a color: </span>
+                <div className="card-date-update__colors__colors">
+                  <ColorsAvailable />
+                </div>
               </div>
-            </div>
-          </form>
-        )}
-      </Modal>
+            </form>
+          )}
+        </Modal>,
+        document.getElementById("root")!
+      )}
     </div>
   );
 }

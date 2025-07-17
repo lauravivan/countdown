@@ -1,7 +1,8 @@
 import { extractDateFromUTCString, getCountingOfDays } from "@/util/date";
-import { DESC_MAX_LENGTH } from "@/util/constants";
 import { useMemo, useState } from "react";
 import { ModalContentType } from "@/types/modal";
+import { BsCheckAll } from "react-icons/bs";
+import { GiPartyPopper } from "react-icons/gi";
 
 interface CardType {
   event: EventType;
@@ -24,21 +25,9 @@ export function Card({
     [event.date]
   );
   const countDateExtense = useMemo(
-    () => `(${extractDateFromUTCString(event.date)})`,
+    () => extractDateFromUTCString(event.date),
     [event.date]
   );
-
-  // const getColorsAvailable = () => {
-  //   const colorsAvailable = getColors().map((color, index) => (
-  //     <span
-  //       key={index}
-  //       className={`color-circle color-circle--${color}`}
-  //       onClick={handleColorPick.bind(self, color)}
-  //     ></span>
-  //   ));
-
-  //   return colorsAvailable;
-  // };
 
   const handleMouseOver = () => {
     setIsCardHover(true);
@@ -48,7 +37,7 @@ export function Card({
     setIsCardHover(false);
   };
 
-  const handleDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newDesc = e.target.value;
     updateEventDesc(event.id, newDesc);
   };
@@ -74,33 +63,38 @@ export function Card({
       onMouseLeave={handleMouseLeave}
     >
       <div className="card__content">
-        <form onSubmit={handleFormSubmit}>
-          <input
-            type="text"
-            name="card-desc"
-            id={event.id}
-            className="card__content__desc"
-            value={event.desc}
-            placeholder={event.desc}
-            maxLength={DESC_MAX_LENGTH}
-            autoComplete="off"
-            onChange={handleDesc}
-          />
-        </form>
-        <div className="card__content__count" onClick={handleClick}>
+        <div>
+          <form onSubmit={handleFormSubmit}>
+            <textarea
+              name="card-desc"
+              id={event.id}
+              className="desc"
+              value={event.desc}
+              placeholder={event.desc}
+              autoComplete="off"
+              onChange={handleDesc}
+            />
+          </form>
+          <span>{countDateExtense}</span>
+        </div>
+        <div className="count" onClick={handleClick}>
           <span>{countOfDays}</span>
-          {isCardHover && <span>{countDateExtense}</span>}
         </div>
       </div>
       {isCardHover && (
         <button
           type="button"
-          className="card__delete"
+          className="card__check"
           onClick={handleDelete}
           aria-label="Remover evento"
         >
-          <ion-icon name="close-circle"></ion-icon>
+          <BsCheckAll />
         </button>
+      )}
+      {countOfDays.includes("today") && (
+        <div className="card__party pulsate-bck">
+          <GiPartyPopper />
+        </div>
       )}
     </article>
   );

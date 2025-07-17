@@ -1,4 +1,4 @@
-import { getStoredSort } from "@/util/storage";
+import { getStoredSort, storeSort } from "@/util/storage";
 import { useState } from "react";
 
 export default function useSort() {
@@ -6,6 +6,7 @@ export default function useSort() {
 
   const selectSort = (sort: string) => {
     setSort(sort);
+    storeSort(sort);
   };
 
   return {

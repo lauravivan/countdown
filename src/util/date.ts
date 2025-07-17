@@ -9,7 +9,7 @@ export function getCountingOfDays(dateToEvent: string) {
   if (difference < 0) {
     return "Already happened";
   } else if (difference == 0) {
-    return "🌈 It's today!! 🌈";
+    return "It's today!!";
   } else if (difference == 1) {
     return "In " + difference + " day";
   }

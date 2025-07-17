@@ -1,5 +1,12 @@
 import { ModalContentType } from "@/types/modal";
-import { FILTER, SORT } from "@/util/constants";
+import {
+  BsFillGridFill,
+  BsFillMoonFill,
+  BsFillSunFill,
+  BsFilter,
+  BsList,
+} from "react-icons/bs";
+import { TbArrowsSort } from "react-icons/tb";
 
 type HeaderProps = {
   theme: string;
@@ -21,18 +28,18 @@ export function Header({
       <div className="header__title-wrapper">
         <div className="header__title-wrapper__title">Countdown</div>
         <button className="toggle-btn" type="button" onClick={toggleTheme}>
-          <ion-icon name={theme} />
+          {theme === "moon" ? <BsFillMoonFill /> : <BsFillSunFill />}
         </button>
       </div>
       <div className="header__menu">
         <button className="toggle-btn" type="button" onClick={toggleView}>
-          <ion-icon name={view} />
+          {view === "grid" ? <BsFillGridFill /> : <BsList />}
         </button>
         <button onClick={() => openModal("filter")} className="select-btn">
-          <ion-icon name={FILTER}></ion-icon>
+          <BsFilter />
         </button>
         <button onClick={() => openModal("sort")} className="select-btn">
-          <ion-icon name={SORT}></ion-icon>
+          <TbArrowsSort />
         </button>
       </div>
     </header>
