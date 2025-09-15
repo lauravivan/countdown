@@ -57,7 +57,7 @@ export function Card({
 
   return (
     <article
-      className="card"
+      className="card scale-in-center"
       style={{ backgroundColor: `#${event.color}` }}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
