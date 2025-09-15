@@ -1,5 +1,3 @@
-/* eslint-disable no-case-declarations */
-
 function filterEvents(
   differenceInMonths: number,
   events: Array<EventType>,
@@ -36,24 +34,23 @@ export function getFilteredEvents(
   filter: string,
   events: Array<EventType>
 ): Array<EventType> {
-  const f: Array<string> = filter.toLowerCase().split(" ");
   const e = [...events];
 
-  if (f.includes("this" || "month")) {
+  if (filter.includes("this")) {
     return filterEvents(0, e);
-  } else if (f.includes("next" || "month")) {
+  } else if (filter.includes("next")) {
     return filterEvents(1, e);
-  } else if (f.includes("2" || "months")) {
+  } else if (filter.includes("2")) {
     return filterEvents(2, e);
-  } else if (f.includes("3" || "months")) {
+  } else if (filter.includes("3")) {
     return filterEvents(3, e);
-  } else if (f.includes("4" || "months")) {
+  } else if (filter.includes("4")) {
     return filterEvents(4, e);
-  } else if (f.includes("5" || "months")) {
+  } else if (filter.includes("5")) {
     return filterEvents(5, e);
-  } else if (f.includes("6" || "months")) {
+  } else if (filter.includes("6")) {
     return filterEvents(6, e);
-  } else if (f.includes("than" || "6" || "months")) {
+  } else if (filter.includes("more")) {
     return filterEvents(6, e, ">");
   }
 

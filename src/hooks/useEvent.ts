@@ -1,13 +1,22 @@
 import { getFormattedDate } from "@/util/date";
 import { getDrawnColor } from "@/util/color";
-import { getStoredEvents } from "@/util/storage";
+import { getStoredEvents, storeEvents } from "@/util/storage";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { getFilterAndSortEvents } from "@/util/filter-and-sort";
 
-export default function useEvent() {
-  const [events, setEvents] = useState<Array<EventType>>(() =>
-    getStoredEvents()
-  );
+export default function useEvent({
+  filter,
+  sort,
+}: {
+  filter: string;
+  sort: string;
+}) {
+  const [events, setEvents] = useState<Array<EventType>>(() => {
+    const e = getStoredEvents();
+
+    return getFilterAndSortEvents(filter, sort, e);
+  });
 
   const createEvent = () => {
     const id = uuidv4();
@@ -28,6 +37,7 @@ export default function useEvent() {
     setEvents((prevEvents) => {
       const e = [...prevEvents];
       e.push(event);
+      storeEvents(e);
       return e;
     });
   };
@@ -41,6 +51,8 @@ export default function useEvent() {
           e.desc = newDesc;
         }
       }
+
+      storeEvents(prevEventsCopy);
 
       return prevEventsCopy;
     });
@@ -56,6 +68,8 @@ export default function useEvent() {
         }
       }
 
+      storeEvents(prevEventsCopy);
+
       return prevEventsCopy;
     });
   };
@@ -69,6 +83,9 @@ export default function useEvent() {
           e.date = getFormattedDate(newDate);
         }
       }
+
+      storeEvents(prevEventsCopy);
+
       return prevEventsCopy;
     });
   };
@@ -76,19 +93,16 @@ export default function useEvent() {
   const deleteEvent = (id: string) => {
     setEvents((prevEvents) => {
       const prevEventsCopy = [...prevEvents];
-      return prevEventsCopy.filter((e) => e.id !== id);
+      const newEvents = prevEventsCopy.filter((e) => e.id !== id);
+
+      storeEvents(newEvents);
+
+      return newEvents;
     });
   };
 
-  // const getFilterAndSortEvents = () => {
-  //   const filtered = getFilteredEvents(filter.filter, events);
-  //   const sorted = getSortedEvents(filtered, sort.sort);
-
-  //   return sorted;
-  // };
-
   return {
-    events,
+    events: getFilterAndSortEvents(filter, sort, events),
     createEvent,
     updateEventDesc,
     updateEventColor,

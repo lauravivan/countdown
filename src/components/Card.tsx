@@ -73,11 +73,17 @@ export function Card({
               placeholder={event.desc}
               autoComplete="off"
               onChange={handleDesc}
+              maxLength={50}
+              rows={3}
             />
           </form>
-          <span>{countDateExtense}</span>
+          <span onClick={handleClick}>{countDateExtense}</span>
         </div>
-        <div className="count" onClick={handleClick}>
+        <div
+          className="count"
+          onClick={handleClick}
+          style={{ border: `1px solid #${event.color}` }}
+        >
           <span>{countOfDays}</span>
         </div>
       </div>

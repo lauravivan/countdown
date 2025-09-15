@@ -1,9 +1,11 @@
+@use "variable" as var;
+
 .modal {
   border: none;
   position: fixed;
   top: 0;
   margin-right: 0;
-  background-color: $gray;
+  background-color: var.$dark-white;
   max-width: 350px;
   height: 100%;
   padding: 20px 30px;
@@ -29,7 +31,7 @@
       margin-bottom: 50px;
 
       &__title {
-        font-size: calc($font-sm + 0.7rem);
+        font-size: calc(var.$font-sm + 0.7rem);
       }
 
       &__close {
@@ -51,7 +53,7 @@
 
     > input {
       width: min-content;
-      background-color: $white;
+      background-color: var.$white;
       border-radius: 5px;
       padding: 10px;
     }
@@ -100,7 +102,7 @@
   }
 
   &__active {
-    background-color: $dark;
+    background-color: var.$dark;
     color: #fff;
   }
 }

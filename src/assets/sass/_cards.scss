@@ -1,16 +1,18 @@
+@use "variable" as var;
+
 .cards {
   width: 100%;
 
   &__add-event {
-    background-color: $dark-white;
+    background-color: var.$dark-white;
     display: flex;
     align-items: center;
     justify-content: center !important;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 15px;
 
     &:hover {
-      box-shadow: inset 1px 1px 6px $white;
+      box-shadow: inset 1px 1px 6px var.$white;
     }
   }
 
@@ -42,15 +44,14 @@
 .cards-view-grid,
 .cards-view-list {
   .card {
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     position: relative;
-    box-shadow: 1px 1px 5px $gray;
-    border: 1px solid $gray;
+    box-shadow: 5px 3px 15px var.$gray;
     width: 100%;
-    border: 1px solid $black;
+    height: 170px;
 
     &__party {
       position: absolute;
@@ -66,9 +67,14 @@
       display: flex;
       flex: 1;
       width: 100%;
+      border-radius: 10px;
+
+      form {
+        flex: 1;
+        margin: 15px 5px 0;
+      }
 
       > div:first-of-type {
-        padding: 15px 10px;
         display: flex;
         flex-direction: column;
         row-gap: 5px;
@@ -76,12 +82,12 @@
         flex: 2;
 
         .desc {
-          font-weight: 500;
-          color: $dark-lighter;
-          font-size: calc($font-md + 0.1rem);
+          font-weight: var.$fs-400;
+          color: var.$dark-lighter;
+          font-size: calc(var.$font-md + 0.1rem);
           background-color: transparent;
           border: none;
-          font-family: $quicksand;
+          font-family: var.$quicksand;
           outline: none;
           resize: none;
           flex: 1;
@@ -89,26 +95,32 @@
         }
 
         > span {
-          font-weight: 700;
-          font-size: calc($font-sm + 0.1rem);
+          font-weight: var.$fs-700;
+          font-size: calc(var.$font-sm + 0.1rem);
+          color: var.$dark;
+          flex: none;
+          margin-top: auto;
+          margin-left: 10px;
+          margin-bottom: 15px;
         }
       }
 
       .count {
         display: flex;
         align-items: center;
-        font-size: calc($font-sm + 0.2rem);
-        background-color: $white;
+        font-size: calc(var.$font-sm + 0.2rem);
+        background-color: var.$white;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         text-align: center;
         justify-content: center;
         flex: 1;
+        color: var.$dark;
       }
     }
 
     &__check {
-      background-color: $dark;
+      background-color: var.$dark;
       top: -25px;
       left: -10px;
       position: absolute;
@@ -116,7 +128,7 @@
       padding: 5px;
 
       > svg {
-        fill: $white;
+        fill: var.$white;
       }
 
       @media (max-width: 480px) {
@@ -124,21 +136,33 @@
       }
     }
   }
-
-  .dark {
-    .card {
-      color: $dark;
-    }
-  }
 }
 
 .dark {
   .cards {
     &__add-event {
-      background-color: $dark-lighter;
+      background-color: var.$dark-lighter;
 
       &:hover {
-        box-shadow: inset 1px 1px 6px $dark;
+        box-shadow: inset 1px 1px 6px var.$dark;
+      }
+    }
+
+    .card {
+      &__check {
+        background-color: var.$white;
+
+        > svg {
+          fill: var.$dark;
+        }
+      }
+
+      &__party {
+        svg {
+          fill: var.$dark;
+          stroke: var.$white;
+          stroke-width: 6px;
+        }
       }
     }
   }

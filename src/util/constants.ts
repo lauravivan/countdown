@@ -26,3 +26,9 @@ export const SORT_OPTIONS = [
 ];
 
 export const DESC_MAX_LENGTH = 150;
+
+export const COLORS = {
+  lightGreen: "D9E9CF",
+  lightBlue: "C7D9DD",
+  lightYellow: "F2E2B1",
+};

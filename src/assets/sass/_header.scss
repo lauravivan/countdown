@@ -1,3 +1,5 @@
+@use "variable" as var;
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -10,6 +12,10 @@
     &__title {
       font-size: 36px;
       font-weight: 700;
+    }
+
+    .toggle-btn {
+      cursor: pointer;
     }
   }
 
@@ -27,7 +33,7 @@
 
     .select-btn:hover,
     .toggle-btn:hover {
-      background-color: $gray !important;
+      background-color: var.$dark-white !important;
     }
   }
 }
@@ -49,7 +55,7 @@
     &__menu {
       .select-btn:hover,
       .toggle-btn:hover {
-        background-color: $dark-lighter !important;
+        background-color: var.$dark-lighter !important;
       }
     }
   }

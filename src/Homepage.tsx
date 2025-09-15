@@ -42,6 +42,12 @@ function ModalContent({
 }
 
 export default function Homepage() {
+  const { view, toggleView } = useView();
+  const { filter, selectFilter } = useFilter();
+  const { selectSort, sort } = useSort();
+  const { theme, toggleTheme } = useTheme();
+  const { closeModal, isOpen, openModal, contentType } = useModal();
+  const [eventId, setEventId] = useState("");
   const {
     events,
     createEvent,
@@ -49,20 +55,7 @@ export default function Homepage() {
     deleteEvent,
     updateEventDate,
     updateEventColor,
-  } = useEvent();
-  const { view, toggleView } = useView();
-  const { filter, selectFilter } = useFilter();
-  const { selectSort, sort } = useSort();
-  const { theme, toggleTheme } = useTheme();
-  const {
-    closeModal,
-    isOpen,
-    openModal,
-    handleTitle,
-    contentType,
-    title: modalTitle,
-  } = useModal();
-  const [eventId, setEventId] = useState("");
+  } = useEvent({ filter, sort });
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,9 +67,9 @@ export default function Homepage() {
   };
 
   const ColorsAvailable = () =>
-    getColors().map((color, index) => (
+    getColors().map((color) => (
       <span
-        key={index}
+        key={color}
         className={`color-circle color-circle--${color}`}
         onClick={updateEventColor.bind(self, eventId, color)}
       ></span>

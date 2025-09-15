@@ -1,12 +1,13 @@
-@import "variable";
+@use "sass:meta";
+@use "variable" as var;
 
 ::-webkit-scrollbar {
   width: 5px;
 }
 
 :root {
-  color: $dark;
-  font-family: $quicksand;
+  color: var.$dark;
+  font-family: var.$quicksand;
 }
 
 body {
@@ -18,8 +19,8 @@ body {
   margin: 0;
 
   &:has(.dark) {
-    background-color: $dark;
-    color: $white;
+    background-color: var.$dark;
+    color: var.$white;
   }
 }
 
@@ -46,8 +47,8 @@ svg {
   font-size: 2rem;
 }
 
-@import "header";
-@import "modal";
-@import "cards";
-@import "animation";
-@import "color-circle";
+@include meta.load-css("header");
+@include meta.load-css("modal");
+@include meta.load-css("cards");
+@include meta.load-css("animation");
+@include meta.load-css("color-circle");
