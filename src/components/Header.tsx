@@ -14,6 +14,7 @@ type HeaderProps = {
   view: string;
   toggleView: () => void;
   openModal: (type: ModalContentType) => void;
+  handleTitle?: (title: string) => void;
 };
 
 export function Header({
@@ -22,7 +23,18 @@ export function Header({
   view,
   toggleView,
   openModal,
+  handleTitle,
 }: HeaderProps) {
+  const handleFilterModal = () => {
+    openModal("filter");
+    handleTitle?.("Filter");
+  };
+
+  const handleSortModal = () => {
+    openModal("sort");
+    handleTitle?.("Sort");
+  };
+
   return (
     <header className="header">
       <div className="header__title-wrapper">
@@ -35,10 +47,10 @@ export function Header({
         <button className="toggle-btn" type="button" onClick={toggleView}>
           {view === "grid" ? <BsFillGridFill /> : <BsList />}
         </button>
-        <button onClick={() => openModal("filter")} className="select-btn">
+        <button onClick={handleFilterModal} className="select-btn">
           <BsFilter />
         </button>
-        <button onClick={() => openModal("sort")} className="select-btn">
+        <button onClick={handleSortModal} className="select-btn">
           <TbArrowsSort />
         </button>
       </div>

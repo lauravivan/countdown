@@ -1,12 +1,15 @@
-export const DEFAULT_THEME = "moon";
+import { FilterType } from "@/types/filter";
+import { SortType } from "@/types/sort";
 
-export const TOGGLE_THEME = "sunny";
+export const DEFAULT_THEME = "sunny";
+
+export const TOGGLE_THEME = "moon";
 
 export const DEFAULT_VIEW = "grid";
 
 export const TOGGLE_VIEW = "list";
 
-export const FILTER_OPTIONS = [
+export const FILTER_OPTIONS: FilterType[] = [
   "All",
   "Happening this month",
   "Happening next month",
@@ -18,7 +21,7 @@ export const FILTER_OPTIONS = [
   "Happening in more than 6 months",
 ];
 
-export const SORT_OPTIONS = [
+export const SORT_OPTIONS: SortType[] = [
   "By Creation (default)",
   "By Color",
   "By Alphabet",
@@ -31,4 +34,10 @@ export const COLORS = {
   lightGreen: "D9E9CF",
   lightBlue: "C7D9DD",
   lightYellow: "F2E2B1",
+  lightSalmon: "FCE7C8",
+  lightBeige: "E2E0C8",
+  lightBrown: "DAB88B",
+  lightPurple: "F1C6D3",
+  lightOrange: "F1AE89",
+  lightPink: "FCE2DB",
 };

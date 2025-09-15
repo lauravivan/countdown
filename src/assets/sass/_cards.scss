@@ -1,5 +1,7 @@
 @use "variable" as var;
 
+$BORDER: 20px;
+
 .cards {
   width: 100%;
 
@@ -9,7 +11,7 @@
     align-items: center;
     justify-content: center !important;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: $BORDER;
 
     &:hover {
       box-shadow: inset 1px 1px 6px var.$white;
@@ -44,14 +46,14 @@
 .cards-view-grid,
 .cards-view-list {
   .card {
-    border-radius: 15px;
+    border-radius: $BORDER;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     position: relative;
     box-shadow: 5px 3px 15px var.$gray;
     width: 100%;
-    height: 170px;
+    height: 140px;
 
     &__party {
       position: absolute;
@@ -71,7 +73,8 @@
 
       form {
         flex: 1;
-        margin: 15px 5px 0;
+        margin-right: 10px;
+        margin-left: 10px;
       }
 
       > div:first-of-type {
@@ -82,9 +85,9 @@
         flex: 2;
 
         .desc {
-          font-weight: var.$fs-400;
+          font-weight: var.$fs-600;
           color: var.$dark-lighter;
-          font-size: calc(var.$font-md + 0.1rem);
+          font-size: calc(var.$font-sm + 0.1rem);
           background-color: transparent;
           border: none;
           font-family: var.$quicksand;
@@ -92,15 +95,16 @@
           resize: none;
           flex: 1;
           width: 100%;
+          margin-top: 20px;
         }
 
         > span {
-          font-weight: var.$fs-700;
-          font-size: calc(var.$font-sm + 0.1rem);
+          font-weight: var.$fs-400;
+          font-size: calc(var.$font-sm - 0.1rem);
           color: var.$dark;
           flex: none;
           margin-top: auto;
-          margin-left: 10px;
+          margin-left: 15px;
           margin-bottom: 15px;
         }
       }
@@ -110,8 +114,8 @@
         align-items: center;
         font-size: calc(var.$font-sm + 0.2rem);
         background-color: var.$white;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-top-right-radius: $BORDER;
+        border-bottom-right-radius: $BORDER;
         text-align: center;
         justify-content: center;
         flex: 1;

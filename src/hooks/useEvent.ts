@@ -1,15 +1,16 @@
-import { getFormattedDate } from "@/util/date";
-import { getDrawnColor } from "@/util/color";
 import { getStoredEvents, storeEvents } from "@/util/storage";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { getFilterAndSortEvents } from "@/util/filter-and-sort";
+import { getFilterAndSortEvents } from "@/util/getFilterAndSortEvents";
+import { FilterType } from "@/types/filter";
+import { getDrawnColor } from "@/util/color/getDrawnColor";
+import { getDateByFilter } from "@/util/date/getDateByFilter";
 
 export default function useEvent({
   filter,
   sort,
 }: {
-  filter: string;
+  filter: FilterType;
   sort: string;
 }) {
   const [events, setEvents] = useState<Array<EventType>>(() => {
@@ -20,7 +21,12 @@ export default function useEvent({
 
   const createEvent = () => {
     const id = uuidv4();
-    const date = getFormattedDate();
+
+    let dateValid = new Date();
+
+    if (filter) {
+      dateValid = getDateByFilter(filter);
+    }
 
     const drawnColor =
       events?.length > 0
@@ -31,7 +37,7 @@ export default function useEvent({
       id: id,
       desc: "Unamed",
       color: drawnColor,
-      date: date,
+      date: dateValid,
     };
 
     setEvents((prevEvents) => {
@@ -74,13 +80,13 @@ export default function useEvent({
     });
   };
 
-  const updateEventDate = (id: string, newDate: string) => {
+  const updateEventDate = (id: string, newDate: Date) => {
     setEvents((prevEvents) => {
       const prevEventsCopy = [...prevEvents];
 
       for (const e of prevEventsCopy) {
         if (e.id === id) {
-          e.date = getFormattedDate(newDate);
+          e.date = newDate;
         }
       }
 

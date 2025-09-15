@@ -3,8 +3,8 @@ import { useState } from "react";
 
 export default function useModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("");
   const [contentType, setContentType] = useState<ModalContentType>(null);
+  const [title, setTitle] = useState("");
 
   const openModal = (type: ModalContentType) => {
     setIsOpen(true);

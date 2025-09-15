@@ -232,7 +232,7 @@ svg {
   align-items: center;
   justify-content: center !important;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 20px;
 }
 
 .cards__add-event:hover {
@@ -266,14 +266,14 @@ svg {
 }
 .cards-view-grid .card,
 .cards-view-list .card {
-  border-radius: 15px;
+  border-radius: 20px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   position: relative;
   box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
   width: 100%;
-  height: 170px;
+  height: 140px;
 }
 
 .cards-view-grid .card__party,
@@ -299,7 +299,8 @@ svg {
 .cards-view-grid .card__content form,
 .cards-view-list .card__content form {
   flex: 1;
-  margin: 15px 5px 0;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .cards-view-grid .card__content > div:first-of-type,
@@ -313,9 +314,9 @@ svg {
 
 .cards-view-grid .card__content > div:first-of-type .desc,
 .cards-view-list .card__content > div:first-of-type .desc {
-  font-weight: 400;
+  font-weight: 600;
   color: #171717;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   background-color: transparent;
   border: none;
   font-family: "Quicksand", sans-serif;
@@ -323,16 +324,17 @@ svg {
   resize: none;
   flex: 1;
   width: 100%;
+  margin-top: 20px;
 }
 
 .cards-view-grid .card__content > div:first-of-type > span,
 .cards-view-list .card__content > div:first-of-type > span {
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-weight: 400;
+  font-size: 0.9rem;
   color: #262626;
   flex: none;
   margin-top: auto;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-bottom: 15px;
 }
 
@@ -342,8 +344,8 @@ svg {
   align-items: center;
   font-size: 1.2rem;
   background-color: rgba(255, 255, 255, 0.87);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   text-align: center;
   justify-content: center;
   flex: 1;
@@ -482,6 +484,30 @@ svg {
 
 .color-circle--F2E2B1 {
   background-color: #f2e2b1;
+}
+
+.color-circle--FCE7C8 {
+  background-color: #fce7c8;
+}
+
+.color-circle--E2E0C8 {
+  background-color: #e2e0c8;
+}
+
+.color-circle--DAB88B {
+  background-color: #dab88b;
+}
+
+.color-circle--F1C6D3 {
+  background-color: #f1c6d3;
+}
+
+.color-circle--F1AE89 {
+  background-color: #f1ae89;
+}
+
+.color-circle--FCE2DB {
+  background-color: #fce2db;
 }
 
 /*# sourceMappingURL=main.css.map */

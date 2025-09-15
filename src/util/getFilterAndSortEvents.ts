@@ -1,5 +1,5 @@
-import { getFilteredEvents } from "./filter";
-import { getSortedEvents } from "./sort";
+import { getFilteredEvents } from "./getFilteredEvents";
+import { getSortedEvents } from "./getSortedEvents";
 
 export function getFilterAndSortEvents(
   filter: string,

@@ -26,22 +26,7 @@ function sortByColor(events: Array<EventType>) {
 
 function sortByDate(events: Array<EventType>) {
   events.sort((a, b) => {
-    const x: any = new Date(a.date);
-    const y: any = new Date(b.date);
-
-    if (x.getFullYear() - y.getFullYear()) {
-      return x - y;
-    }
-
-    if (x.getMonth() - y.getMonth()) {
-      return x - y;
-    }
-
-    if (x.getDate() - y.getDate()) {
-      return x - y;
-    }
-
-    return 0;
+    return a.date.getTime() - b.date.getTime();
   });
 
   return events;
@@ -51,13 +36,17 @@ export function getSortedEvents(
   filteredEvents: Array<EventType>,
   typeOfSort: string
 ) {
-  const s = typeOfSort.toLowerCase().split(" ");
+  const sortLower = typeOfSort.toLowerCase();
 
-  if (s.includes("alphabet")) {
+  if (sortLower.includes("alphabet")) {
     return sortByAlphabet(filteredEvents);
-  } else if (s.includes("color")) {
+  }
+
+  if (sortLower.includes("color")) {
     return sortByColor(filteredEvents);
-  } else if (s.includes("date")) {
+  }
+
+  if (sortLower.includes("date")) {
     return sortByDate(filteredEvents);
   }
 

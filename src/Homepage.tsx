@@ -9,44 +9,19 @@ import { Modal } from "@/components/Modal";
 import useModal from "@/hooks/useModal";
 import { FILTER_OPTIONS, SORT_OPTIONS } from "./util/constants";
 import { useState } from "react";
-import { getColors } from "./util/color";
 import { createPortal } from "react-dom";
 import { BsPlusLg } from "react-icons/bs";
-
-function ModalContent({
-  options,
-  optionSelected,
-  handleSelect,
-}: {
-  options: string[];
-  optionSelected: string;
-  handleSelect: (option: string) => void;
-}) {
-  return (
-    <ul className="select-list">
-      {options.map((option, i) => {
-        return (
-          <li
-            key={i}
-            className={`${
-              option === optionSelected ? " select-list__active" : ""
-            } select-list__option`}
-            onClick={() => handleSelect(option)}
-          >
-            {option}
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
+import { getColors } from "./util/color/getColors";
+import { FilterType } from "./types/filter";
+import { SortType } from "./types/sort";
 
 export default function Homepage() {
   const { view, toggleView } = useView();
   const { filter, selectFilter } = useFilter();
   const { selectSort, sort } = useSort();
   const { theme, toggleTheme } = useTheme();
-  const { closeModal, isOpen, openModal, contentType } = useModal();
+  const { closeModal, isOpen, openModal, contentType, handleTitle, title } =
+    useModal();
   const [eventId, setEventId] = useState("");
   const {
     events,
@@ -63,7 +38,7 @@ export default function Homepage() {
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const datePicked = e.target.value;
-    updateEventDate(eventId, datePicked);
+    updateEventDate(eventId, new Date(datePicked));
   };
 
   const ColorsAvailable = () =>
@@ -84,6 +59,7 @@ export default function Homepage() {
           view={view}
           theme={theme}
           openModal={openModal}
+          handleTitle={handleTitle}
         />
         <main>
           <div className={`cards-view-${view} cards`}>
@@ -103,35 +79,52 @@ export default function Homepage() {
                 deleteEvent={deleteEvent}
                 handleEventId={(eventId: string) => setEventId(eventId)}
                 openModal={openModal}
+                handleTitle={handleTitle}
               />
             ))}
           </div>
         </main>
       </div>
       {createPortal(
-        <Modal
-          closeModal={closeModal}
-          title={contentType === "filter" ? "Filter" : "Sort"}
-          isOpen={isOpen}
-        >
+        <Modal closeModal={closeModal} title={title} isOpen={isOpen}>
           {contentType === "filter" && (
-            <ModalContent
-              optionSelected={filter}
-              options={FILTER_OPTIONS}
-              handleSelect={selectFilter}
-            />
+            <ul className="select-list">
+              {FILTER_OPTIONS.map((option: FilterType, i) => {
+                return (
+                  <li
+                    key={i}
+                    className={`${
+                      option === filter ? " select-list__active" : ""
+                    } select-list__option`}
+                    onClick={() => selectFilter(option)}
+                  >
+                    {option}
+                  </li>
+                );
+              })}
+            </ul>
           )}
           {contentType === "sort" && (
-            <ModalContent
-              optionSelected={sort}
-              options={SORT_OPTIONS}
-              handleSelect={selectSort}
-            />
+            <ul className="select-list">
+              {SORT_OPTIONS.map((option: SortType, i) => {
+                return (
+                  <li
+                    key={i}
+                    className={`${
+                      option === sort ? " select-list__active" : ""
+                    } select-list__option`}
+                    onClick={() => selectSort(option)}
+                  >
+                    {option}
+                  </li>
+                );
+              })}
+            </ul>
           )}
           {contentType === "card" && (
             <form className="card-date-update" onSubmit={handleFormSubmit}>
               <label className="card-date-update__date">
-                New date:
+                Pick a date:
                 <input
                   type="date"
                   name="card-date"

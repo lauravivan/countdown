@@ -1,8 +1,9 @@
-import { extractDateFromUTCString, getCountingOfDays } from "@/util/date";
 import { useMemo, useState } from "react";
 import { ModalContentType } from "@/types/modal";
 import { BsCheckAll } from "react-icons/bs";
 import { GiPartyPopper } from "react-icons/gi";
+import { getCountingOfDays } from "@/util/date/getCountingOfDays";
+import { formatDate } from "@/util/date/formatDate";
 
 interface CardType {
   event: EventType;
@@ -10,6 +11,7 @@ interface CardType {
   deleteEvent: (id: string) => void;
   openModal: (type: ModalContentType) => void;
   handleEventId: (id: string) => void;
+  handleTitle: (title: string) => void;
 }
 
 export function Card({
@@ -18,6 +20,7 @@ export function Card({
   deleteEvent,
   openModal,
   handleEventId,
+  handleTitle,
 }: CardType) {
   const [isCardHover, setIsCardHover] = useState(false);
   const countOfDays = useMemo(
@@ -25,7 +28,7 @@ export function Card({
     [event.date]
   );
   const countDateExtense = useMemo(
-    () => extractDateFromUTCString(event.date),
+    () => formatDate(new Date(event.date)),
     [event.date]
   );
 
@@ -53,6 +56,7 @@ export function Card({
   const handleClick = () => {
     openModal("card");
     handleEventId(event.id);
+    handleTitle(`Edit ${event.desc}`);
   };
 
   return (
@@ -73,7 +77,7 @@ export function Card({
               placeholder={event.desc}
               autoComplete="off"
               onChange={handleDesc}
-              maxLength={50}
+              maxLength={63}
               rows={3}
             />
           </form>
@@ -82,7 +86,7 @@ export function Card({
         <div
           className="count"
           onClick={handleClick}
-          style={{ border: `1px solid #${event.color}` }}
+          style={{ border: `2px solid #${event.color}` }}
         >
           <span>{countOfDays}</span>
         </div>
