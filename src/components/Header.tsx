@@ -46,6 +46,9 @@ export function Header({
   return (
     <header className="header">
       <div className="header__title-wrapper">
+        <div className="header__title-wrapper__img-wrapper">
+          <img src="/mascot.png" />
+        </div>
         <div className="header__title-wrapper__title">Countdown</div>
         <button className="toggle-btn" type="button" onClick={toggleTheme}>
           {theme === "moon" ? <BsFillMoonFill /> : <BsFillSunFill />}

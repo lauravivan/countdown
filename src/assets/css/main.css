@@ -82,11 +82,30 @@ svg {
   display: flex;
   column-gap: 10px;
   flex: 1;
+  position: relative;
+}
+
+.header__title-wrapper__img-wrapper {
+  width: auto;
+  height: auto;
+  max-width: 40px;
+  max-height: 40px;
+  position: absolute;
+  z-index: 100;
+  top: -25px;
+  left: 18px;
+}
+
+.header__title-wrapper__img-wrapper img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .header__title-wrapper__title {
   font-size: 36px;
   font-weight: 700;
+  z-index: 200;
 }
 
 .header__title-wrapper .toggle-btn {
