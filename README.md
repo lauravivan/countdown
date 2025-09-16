@@ -8,7 +8,7 @@ This is a web app made with React.js to keep on track countdown of important eve
 
 ## Preview
 
-![Project preview light theme](https://github.com/lauravivan/countdown/assets/64754203/1804a5ab-75c3-4d16-87f2-4f9a20e2ec65)
+![Project preview light theme](./public/light-theme.png)
 
 ## Features
 
