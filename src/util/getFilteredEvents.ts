@@ -1,4 +1,4 @@
-import { differenceInMonths } from "date-fns";
+import { differenceInCalendarMonths } from "date-fns";
 
 function filterEvents(
   diffInMonths: number,
@@ -9,7 +9,8 @@ function filterEvents(
   const filtered: Array<EventType> = [];
 
   events.filter((event: EventType) => {
-    const difference = differenceInMonths(event.date, date);
+    const eventDate = new Date(event.date);
+    const difference = differenceInCalendarMonths(eventDate, date);
 
     switch (operator) {
       case "==":
@@ -69,5 +70,5 @@ export function getFilteredEvents(
     return filterEvents(6, e, ">");
   }
 
-  return events;
+  return e;
 }

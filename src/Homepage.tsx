@@ -30,6 +30,8 @@ export default function Homepage() {
     deleteEvent,
     updateEventDate,
     updateEventColor,
+    handleSearch,
+    search,
   } = useEvent({ filter, sort });
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -60,29 +62,37 @@ export default function Homepage() {
           theme={theme}
           openModal={openModal}
           handleTitle={handleTitle}
+          handleSearch={handleSearch}
         />
         <main>
           <div className={`cards-view-${view} cards`}>
-            <div
-              className="cards__add-event"
-              style={{ textAlign: "center" }}
-              onClick={createEvent}
-              aria-label="Adicionar evento"
-            >
-              <BsPlusLg />
-            </div>
-            {events.map((event: EventType) => (
-              <Card
-                event={event}
-                key={event.id}
-                updateEventDesc={updateEventDesc}
-                deleteEvent={deleteEvent}
-                handleEventId={(eventId: string) => setEventId(eventId)}
-                openModal={openModal}
-                handleTitle={handleTitle}
-              />
-            ))}
+            {!search && (
+              <div
+                className="cards__add-event"
+                style={{ textAlign: "center" }}
+                onClick={createEvent}
+                aria-label="Adicionar evento"
+              >
+                <BsPlusLg />
+              </div>
+            )}
+
+            {events.length > 0 &&
+              events.map((event: EventType) => (
+                <Card
+                  event={event}
+                  key={event.id}
+                  updateEventDesc={updateEventDesc}
+                  deleteEvent={deleteEvent}
+                  handleEventId={(eventId: string) => setEventId(eventId)}
+                  openModal={openModal}
+                  handleTitle={handleTitle}
+                />
+              ))}
           </div>
+          {search && events.length === 0 && (
+            <div>Sorry, we couldn't find any results for you research</div>
+          )}
         </main>
       </div>
       {createPortal(

@@ -1,5 +1,5 @@
 import { getStoredEvents, storeEvents } from "@/util/storage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getFilterAndSortEvents } from "@/util/getFilterAndSortEvents";
 import { FilterType } from "@/types/filter";
@@ -13,11 +13,27 @@ export default function useEvent({
   filter: FilterType;
   sort: string;
 }) {
+  const [search, setSearch] = useState("");
   const [events, setEvents] = useState<Array<EventType>>(() => {
     const e = getStoredEvents();
-
     return getFilterAndSortEvents(filter, sort, e);
   });
+
+  useEffect(() => {
+    setEvents(() => {
+      if (search) {
+        const evsFiltered = events.filter(
+          (e) =>
+            search.toLowerCase().includes(e.desc.toLowerCase()) ||
+            e.desc.toLowerCase().includes(search.toLowerCase())
+        );
+
+        return evsFiltered;
+      }
+
+      return getStoredEvents();
+    });
+  }, [search]);
 
   const createEvent = () => {
     const id = uuidv4();
@@ -114,5 +130,7 @@ export default function useEvent({
     updateEventColor,
     updateEventDate,
     deleteEvent,
+    handleSearch: (search: string) => setSearch(search),
+    search,
   };
 }

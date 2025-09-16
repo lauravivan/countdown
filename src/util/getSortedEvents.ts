@@ -26,7 +26,9 @@ function sortByColor(events: Array<EventType>) {
 
 function sortByDate(events: Array<EventType>) {
   events.sort((a, b) => {
-    return a.date.getTime() - b.date.getTime();
+    const x = new Date(a.date);
+    const y = new Date(b.date);
+    return x.getTime() - y.getTime();
   });
 
   return events;

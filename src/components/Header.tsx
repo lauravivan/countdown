@@ -1,10 +1,12 @@
 import { ModalContentType } from "@/types/modal";
+import { ChangeEvent } from "react";
 import {
   BsFillGridFill,
   BsFillMoonFill,
   BsFillSunFill,
   BsFilter,
   BsList,
+  BsSearch,
 } from "react-icons/bs";
 import { TbArrowsSort } from "react-icons/tb";
 
@@ -15,6 +17,7 @@ type HeaderProps = {
   toggleView: () => void;
   openModal: (type: ModalContentType) => void;
   handleTitle?: (title: string) => void;
+  handleSearch: (search: string) => void;
 };
 
 export function Header({
@@ -24,6 +27,7 @@ export function Header({
   toggleView,
   openModal,
   handleTitle,
+  handleSearch,
 }: HeaderProps) {
   const handleFilterModal = () => {
     openModal("filter");
@@ -35,6 +39,10 @@ export function Header({
     handleTitle?.("Sort");
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleSearch(e.currentTarget.value);
+  };
+
   return (
     <header className="header">
       <div className="header__title-wrapper">
@@ -43,6 +51,15 @@ export function Header({
           {theme === "moon" ? <BsFillMoonFill /> : <BsFillSunFill />}
         </button>
       </div>
+      <form>
+        <input
+          placeholder="Search for a specific date..."
+          onChange={handleChange}
+          id="search"
+          name="search"
+        />
+        <BsSearch />
+      </form>
       <div className="header__menu">
         <button className="toggle-btn" type="button" onClick={toggleView}>
           {view === "grid" ? <BsFillGridFill /> : <BsList />}
