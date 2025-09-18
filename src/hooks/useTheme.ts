@@ -1,6 +1,6 @@
 import { ThemeType } from "@/types/theme";
 import { DEFAULT_THEME, TOGGLE_THEME } from "@/util/constants";
-import { getStoredTheme, storeTheme } from "@/util/storage";
+import { getStoredTheme, storeTheme } from "@/util/storage/theme";
 import { useState } from "react";
 
 export default function useTheme() {

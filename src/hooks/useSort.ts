@@ -1,5 +1,5 @@
 import { SortType } from "@/types/sort";
-import { getStoredSort, storeSort } from "@/util/storage";
+import { getStoredSort, storeSort } from "@/util/storage/sort";
 import { useState } from "react";
 
 export default function useSort() {

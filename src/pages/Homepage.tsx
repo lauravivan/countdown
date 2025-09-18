@@ -7,13 +7,13 @@ import useSort from "@/hooks/useSort";
 import useTheme from "@/hooks/useTheme";
 import { Modal } from "@/components/Modal";
 import useModal from "@/hooks/useModal";
-import { FILTER_OPTIONS, SORT_OPTIONS } from "./util/constants";
+import { FILTER_OPTIONS, SORT_OPTIONS } from "../util/constants";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { BsPlusLg } from "react-icons/bs";
-import { getColors } from "./util/color/getColors";
-import { FilterType } from "./types/filter";
-import { SortType } from "./types/sort";
+import { getColors } from "../util/color/getColors";
+import { FilterType } from "../types/filter";
+import { SortType } from "../types/sort";
 
 export default function Homepage() {
   const { view, toggleView } = useView();

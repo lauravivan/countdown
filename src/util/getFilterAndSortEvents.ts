@@ -1,5 +1,5 @@
-import { getFilteredEvents } from "./getFilteredEvents";
-import { getSortedEvents } from "./getSortedEvents";
+import { getFilteredEvents } from "./filter/getFilteredEvents";
+import { getSortedEvents } from "./sort/getSortedEvents";
 
 export function getFilterAndSortEvents(
   filter: string,
@@ -7,7 +7,5 @@ export function getFilterAndSortEvents(
   events: Array<EventType>
 ) {
   const filtered = getFilteredEvents(filter, events);
-  const sorted = getSortedEvents(filtered, sort);
-
-  return sorted;
+  return getSortedEvents(filtered, sort);
 }

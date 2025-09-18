@@ -28,8 +28,6 @@ export const SORT_OPTIONS: SortType[] = [
   "By Date",
 ];
 
-export const DESC_MAX_LENGTH = 150;
-
 export const COLORS = {
   lightGreen: "D9E9CF",
   lightBlue: "C7D9DD",

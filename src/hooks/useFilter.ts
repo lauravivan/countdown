@@ -1,5 +1,5 @@
 import { FilterType } from "@/types/filter";
-import { getStoredFilter, storeFilter } from "@/util/storage";
+import { getStoredFilter, storeFilter } from "@/util/storage/filter";
 import { useState } from "react";
 
 export default function useFilter() {
