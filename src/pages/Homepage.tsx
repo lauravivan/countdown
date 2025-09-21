@@ -91,7 +91,7 @@ export default function Homepage() {
               ))}
           </div>
           {search && events.length === 0 && (
-            <div>Sorry, we couldn't find any results for you research</div>
+            <div>Sorry, we couldn’t find any results related to your research.</div>
           )}
         </main>
       </div>
