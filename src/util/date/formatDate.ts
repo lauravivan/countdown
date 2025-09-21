@@ -1,4 +1,4 @@
-export function formatDate(date: Date) {
+export function formatDate(date: Date): string {
   const dateUTCString = date.toUTCString();
   const dateUTCStringSplit = dateUTCString.split(" ");
   const dayOfWeek = dateUTCStringSplit[0];

@@ -1,12 +1,10 @@
 import { getColor } from "./getColor";
 
-export function getDrawnColor(lastColor: string) {
+export function getDrawnColor(lastColor: string): string {
   let drawnColor = getColor();
 
-  if (lastColor) {
-    while (lastColor == drawnColor) {
-      drawnColor = getColor();
-    }
+  while (lastColor == drawnColor) {
+    drawnColor = getColor();
   }
 
   return drawnColor;

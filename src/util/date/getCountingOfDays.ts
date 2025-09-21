@@ -1,17 +1,12 @@
 import { differenceInCalendarDays } from "date-fns";
 
-export function getCountingOfDays(dateToEvent: Date) {
+export function getCountingOfDays(dateToEvent: Date): string {
   const currentDate = new Date();
-
   const difference = differenceInCalendarDays(dateToEvent, currentDate);
 
-  if (difference < 0) {
-    return "Already happened";
-  } else if (difference == 0) {
-    return "It's today!!";
-  } else if (difference == 1) {
-    return "In " + difference + " day";
-  }
+  const happened = difference < 0 && "Already happened";
+  const today = difference == 0 && "It's today!!";
+  const oneDay = difference == 1 && `In ${difference} day`;
 
-  return "In " + difference + " days";
+  return happened || today || oneDay || `In ${difference} days`;
 }
