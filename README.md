@@ -4,7 +4,7 @@
 
 ## Description
 
-This is a web app made with React.js to keep on track countdown of important events.
+This is a website made with React.js to keep on track countdown of important events.
 
 ## Preview
 
